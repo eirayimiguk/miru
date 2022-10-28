@@ -1,9 +1,15 @@
 import json
 
 from miru.notion.client import NotionClient
+from miru.notion.databases import Databases
 from .notion.pages import Pages
 
 pages = Pages()
-content = pages.retrieve_page("2e0b7c86c23e47e5aa5703a81a413987")
-print(json.dumps(json.loads(content), indent=4))
+databases = Databases()
 
+database_id = None
+
+content = databases.retrieve_database(database_id)
+print(json.dumps(content, ensure_ascii=False, indent=4))
+content = databases.query_database(database_id)
+print(json.dumps(content, ensure_ascii=False, indent=4))
