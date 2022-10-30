@@ -21,8 +21,7 @@ def update_tags():
         "filter": {
             "property": "Tags",
             "multi_select": {
-                # "does_not_contain": "miru-parsed"
-                "contains": "miru-parsed"
+                "does_not_contain": "miru-parsed"
             }
         },
         "page_size": 100
