@@ -2,6 +2,8 @@ import json
 import os
 import logging
 
+from optparse import OptionParser
+
 from miru.parser import Parser
 from miru.notion.pages import Pages
 from miru.notion.databases import Databases
@@ -56,7 +58,16 @@ def main():
 
 
 if __name__ == "__main__":
+    # parse options
+    parser = OptionParser()
+    parser.add_option("-v", "--verbose", action="store_true", default=False)
+    (options, args) = parser.parse_args()
+
+    # set log-level
     FORMAT = '%(asctime)s [%(levelname)s] %(message)s'
-    logging.basicConfig(level=logging.DEBUG, format=FORMAT)
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG, format=FORMAT)
+    else:
+        logging.basicConfig(level=logging.INFO, format=FORMAT)
 
     main()
