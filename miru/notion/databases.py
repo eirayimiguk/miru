@@ -1,4 +1,3 @@
-from email import header
 import json
 
 from urllib.parse import urljoin
@@ -10,11 +9,15 @@ from miru.notion.client import NotionClient
 
 class Databases(NotionClient):
     def retrieve_database(self, database_id: str):
-        url = urljoin(self.base_url, f"databases/{database_id}")
+        endpoint = f"databases/{database_id}"
+        url = urljoin(self.base_url, endpoint)
+
         req = requests.get(url, headers=self.headers, params=None)
         return json.loads(req.text)
 
-    def query_database(self, database_id: str):
-        url = urljoin(self.base_url, f"databases/{database_id}/query")
-        req = requests.post(url, headers=self.headers, data=None)
+    def query_database(self, database_id: str, data: dict = {}):
+        endpoint = f"databases/{database_id}/query"
+        url = urljoin(self.base_url, endpoint)
+
+        req = requests.post(url, headers=self.headers, json=data)
         return json.loads(req.text)
