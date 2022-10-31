@@ -1,7 +1,7 @@
 from typing import Tuple
 
 class Parser:
-    def novelai_diffusion(text: str) -> Tuple[str, list]:
+    def novelai_diffusion(text: str, parsed_tag: dict) -> Tuple[str, list]:
         """
         Filename
             Pattern 1
@@ -14,6 +14,6 @@ class Parser:
         filename, tags = text.rsplit(" ", 1)[1], text.rsplit(" ", 1)[0]
         tags = [x.strip().replace("{", "").replace("}", "").replace("(", "").replace(")", "") for x in tags.split(", ") if not x.strip() == '']
         tags = [{"name":tag} for tag in tags]
-        tags.append({"name": "miru-parsed"})
+        tags.append(parsed_tag)
 
         return filename, tags

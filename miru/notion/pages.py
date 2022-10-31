@@ -15,6 +15,13 @@ class Pages(NotionClient):
         req = requests.get(url, headers=self.headers, params=None)
         return json.loads(req.text)
 
+    def create_page(self, data: dict):
+        endpoint = f"pages"
+        url = urljoin(self.base_url, endpoint)
+
+        req = requests.post(url, headers=self.headers, json=data)
+        return json.loads(req.text)
+
     def update_page(self, page_id: str, data: dict = {}):
         endpoint = f"pages/{page_id}"
         url = urljoin(self.base_url, endpoint)

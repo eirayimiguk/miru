@@ -5,44 +5,71 @@ import logging
 from optparse import OptionParser
 
 from miru.parser import Parser
-from miru.notion.pages import Pages
+from miru.notion.blocks import Blocks
 from miru.notion.databases import Databases
+from miru.notion.pages import Pages
 
 
 def pprint(D: dict):
     output = json.dumps(D, ensure_ascii=False, indent=4)
-    logging.debug(output)
+    logging.info(output)
 
 
 def update_tags():
     pages = Pages()
     databases = Databases()
 
-    database_id = os.environ.get("NOTION_DATABASE_ID")
     data = {
         "filter": {
             "property": "Tags",
             "multi_select": {
-                "does_not_contain": "miru-parsed"
+                "does_not_contain": PARSED_TAG["name"]
             }
         },
         "page_size": 100
     }
-    content = databases.query_database(database_id, data)
+    content = databases.query_database(NOTION_DB_PICTURES, data)
 
     for res in content["results"]:
         page_id = res["id"]
         page = pages.retrieve_page(page_id)
         text = page["properties"]["Names"]["title"][0]["plain_text"]
-        _, tags = Parser.novelai_diffusion(text)
+        _, tags = Parser.novelai_diffusion(text, PARSED_TAG)
         data = {"properties":{"Tags":{"multi_select": tags}}}
 
         logging.info("Update: {}".format(page_id))
         pages.update_page(page_id, data)
 
 
+def search_images(tags: list) -> list:
+    blocks = Blocks()
+    databases = Databases()
+
+    conditions = []
+    for tag in tags:
+        conditions.append({
+            "property": "Tags",
+            "multi_select": {
+                "contains": tag
+            }
+        })
+
+
+    data = {"filter": {"and": conditions}}
+
+    urls = []
+    res = databases.query_database(NOTION_DB_PICTURES, data)
+    for res in res["results"]:
+        page_id = res["id"]
+        res = blocks.retrieve_block_children(page_id)
+        for res in res["results"]:
+            urls.append(res["image"]["file"]["url"])
+    return urls
+
+
 def main():
     update_tags()
+    search_images(["word"])
 
 
 if __name__ == "__main__":
@@ -60,5 +87,9 @@ if __name__ == "__main__":
         logging.basicConfig(level=logging.DEBUG, format=FORMAT)
     else:
         logging.basicConfig(level=logging.INFO, format=FORMAT)
+
+    # Global Parameters
+    PARSED_TAG = {"name":"MiruParsed"}
+    NOTION_DB_PICTURES = os.environ.get("NOTION_DB_PICTURES")
 
     main()
