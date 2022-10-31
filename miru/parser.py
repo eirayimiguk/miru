@@ -5,12 +5,14 @@ class Parser:
         """
         Filename
             Pattern 1
-                "tag, tag, tag, filename.png"
-            Pattern 2
-                "tag, tag, tag filename.png"
+                "tag, tag, tag, s-xxx.png" -> s-xxx, [tag, tag, tag]
+            pattern 2
+                "tag, tag, tag s-xxx.png" -> s-xxx, [tag, tag, tag]
+            pattern 2
+                "{tag}, {{tag}}, tag s-xxx.png" -> s-xxx, [tag, tag, tag]
         """
         filename, tags = text.rsplit(" ", 1)[1], text.rsplit(" ", 1)[0]
-        tags = [x.strip() for x in tags.split(", ") if not x.strip() == '']
+        tags = [x.strip().replace("{", "").replace("}", "").replace("(", "").replace(")", "") for x in tags.split(", ") if not x.strip() == '']
         tags = [{"name":tag} for tag in tags]
         tags.append({"name": "miru-parsed"})
 
