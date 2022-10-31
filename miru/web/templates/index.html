@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Form and Search button -->
+<div class="col-12">
+  <form class="form-row align-items-center " action="/" method="post" accept-charset="utf-8">
+    <div class="row">
+      <input name="tags" class="col-9">
+      <button type="submit" class="col-3 btn btn-outline-primary rounded-0">search</button>
+    </div>
+  </form>
+</div>
+
+<!-- Images -->
+<div class="row gallery no-gutters">
+  {% for url in urls %}
+  <div class="item col-xl-2 col-lg-3 col-md-4 col-sm-6 col-n-12">
+    <img src="{{ url }}" loading="lazy">
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Masonry -->
+<script>
+  $('.gallery').imagesLoaded(function () {
+    $('.gallery').masonry({
+      itemSelector: '.item'
+    });
+  });
+</script>
+
+<!-- Inactive pinch-in/out -->
+<script>
+  document.body.addEventListener("touchstart", function (e) {
+    if (e.touches && e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+  document.body.addEventListener("touchmove", function (e) {
+    if (e.touches && e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+</script>
+
+{% endblock %}
