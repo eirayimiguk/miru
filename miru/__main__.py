@@ -4,7 +4,7 @@ from optparse import OptionParser
 
 from flask import Flask, render_template, request
 
-from miru.batch import search_images
+from miru.batch import search_images, update_tags
 
 
 app = Flask(__name__, template_folder="web/templates", static_folder="web/static")
@@ -17,6 +17,11 @@ def index():
         tags = request.form["tags"].split(", ")
         urls = search_images(tags)
         return render_template("index.html", urls=urls)
+
+@app.route('/update')
+def update():
+    update_tags()
+    return render_template("update.html")
 
 
 if __name__ == "__main__":
