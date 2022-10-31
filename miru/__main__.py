@@ -33,24 +33,12 @@ def update_tags():
     for res in content["results"]:
         page_id = res["id"]
         page = pages.retrieve_page(page_id)
+        text = page["properties"]["Names"]["title"][0]["plain_text"]
+        _, tags = Parser.novelai_diffusion(text)
+        data = {"properties":{"Tags":{"multi_select": tags}}}
 
-        is_parsed = False
-        for ms in page["properties"]["Tags"]["multi_select"]:
-            if ms["name"] == "miru-parsed":
-                is_parsed = True
-                break
-        if is_parsed:
-            logging.info("Parsed: {}".format(page_id))
-        else:
-            text = page["properties"]["Names"]["title"][0]["plain_text"]
-            _, tags = Parser.novelai_diffusion(text)
-            data = {
-                "properties": {
-                    "Tags": {"multi_select": tags}
-                }
-            }
-            logging.info("Update: {}".format(page_id))
-            pages.update_page(page_id, data)
+        logging.info("Update: {}".format(page_id))
+        pages.update_page(page_id, data)
 
 
 def main():
