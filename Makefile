@@ -6,3 +6,6 @@ debug:
 
 test:
 	python -m unittest discover tests
+
+cli:
+	python -m miru.cli

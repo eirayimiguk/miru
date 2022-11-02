@@ -1,0 +1,256 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>服装</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "服装" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>Meta</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "Meta" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>ポーズ</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "ポーズ" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>属性</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "属性" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>職業</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "職業" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>行為</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "行為" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>拘束</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "拘束" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>帽子</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "帽子" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>皮膚</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "皮膚" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>目</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "目" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>目線</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "目線" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>表情</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "表情" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>歯</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "歯" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>唇</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "唇" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>腋</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "腋" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>胸</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "胸" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>胴体</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "胴体" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>スカート</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "スカート" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>股</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "股" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>尻</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "尻" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>膣</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "膣" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>下着</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "下着" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>靴下</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "靴下" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>足</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "足" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>足裏</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "足裏" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>靴</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "靴" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>液体</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "液体" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+<h2>エフェクト</h2>
+<p>
+    {% for word in words %}
+    {% if word["tag"] == "エフェクト" %}
+    <input type="checkbox" name="word" value='{{ word["name"] }}'>{{ word["mean"] }}<br>
+    {% endif %}
+    {% endfor %}
+</p>
+
+{% endblock %}
