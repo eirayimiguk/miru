@@ -9,6 +9,7 @@ from miru.batch import search_images, update_tags
 
 app = Flask(__name__, template_folder="web/templates", static_folder="web/static")
 
+
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "GET":
@@ -17,6 +18,7 @@ def index():
         tags = request.form["tags"].split(", ")
         urls = search_images(tags)
         return render_template("index.html", urls=urls)
+
 
 @app.route('/update')
 def update():
