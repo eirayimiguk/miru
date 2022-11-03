@@ -1,3 +1,5 @@
+export NOTION_DB_IMAGES=${NOTION_DB_NAI_DIFFUSION}
+
 default:
 	python -m miru
 

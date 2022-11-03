@@ -1,6 +1,6 @@
 import random
 
-from miru.batch import get_tags
+from miru.batch import get_tags, search_images, update_tags
 
 
 def chanting_magic_at_random(length: int = 10):
@@ -13,8 +13,17 @@ def chanting_magic_at_random(length: int = 10):
     print(", ".join(spell))
 
 
+def search():
+    urls = search_images(["looking at viewer"])
+    print(urls)
+
+
+def update():
+    update_tags()
+
+
 def main():
-    chanting_magic_at_random(50)
+    update()
 
 
 if __name__ == "__main__":
