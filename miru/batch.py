@@ -67,29 +67,24 @@ def search_images(tags: list) -> list:
     return urls
 
 
-def get_words() -> list:
+def get_tags() -> list:
     """
-    Tagsデータベースからタグの一覧を取得し、リスト形式で返します
+    Tagsデータベースからすべてのタグを取得し、リスト形式で返します
 
     return
         [{name, mean, tag}, ...,]
     """
     databases = Databases()
-    res = databases.query_database(NOTION_DB_TAGS)
 
-    # FIXME: 100件超えるのでページングの実装必須
-
-    words = []
-    for r in res["results"]:
-        name = r["properties"]["Name"]["title"][0]["text"]["content"]
-        mean = r["properties"]["Mean"]["rich_text"][0]["text"]["content"]
-        tag = r["properties"]["Tag"]["select"]["name"]
-
-        words.append(
-            {
-                "name": name,
-                "mean": mean,
-                "tag" : tag
-            }
-        )
-    return words
+    tags, data, has_more = [], {}, True
+    while has_more:
+        response = databases.query_database(NOTION_DB_TAGS, data=data)
+        for r in response["results"]:
+            tags.append({
+                "name": r["properties"]["Name"]["title"][0]["text"]["content"],
+                "mean": r["properties"]["Mean"]["rich_text"][0]["text"]["content"],
+                "tag" : r["properties"]["Tag"]["select"]["name"]
+            })
+        has_more = response["has_more"]
+        data["start_cursor"] = response["next_cursor"]
+    return tags
