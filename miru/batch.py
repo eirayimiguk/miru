@@ -13,7 +13,7 @@ NOTION_DB_TAGS = os.environ.get("NOTION_DB_TAGS")
 NOTION_DB_IMAGES = os.environ.get("NOTION_DB_IMAGES")
 
 
-def search_images(tags: list, enable_or_search: bool = False) -> list:
+def search_images(tags: list, start_cursor=None, enable_or_search: bool = False) -> list:
     """
     NAI Diffusionデータベースからすべての画像のURLを取得し、リスト形式で返します
 
@@ -28,9 +28,14 @@ def search_images(tags: list, enable_or_search: bool = False) -> list:
         properties.append({"property": "Tags", "multi_select": {"contains": tag}})
 
     if enable_or_search:
-        data = {"filter": {"or": properties}, "page_size": 10}
+        data = {"filter": {"or": properties}}
     else:
-        data = {"filter": {"and": properties}, "page_size": 10}
+        data = {"filter": {"and": properties}}
+
+    if not start_cursor is None:
+        data["start_cursor"] = start_cursor
+
+    data["page_size"] = 30
 
     urls = []
     response = databases.query_database(NOTION_DB_IMAGES, data)

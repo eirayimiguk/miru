@@ -32,7 +32,7 @@ def index(request: Request):
 async def index(request: Request):
     data = await request.form()
     tags = [x.strip() for x in data["tags"].split(",") if not x.strip() == '']
-    urls = search_images(tags)
+    urls, _ = search_images(tags)
     return templates.TemplateResponse(
         "index.html", {"request": request, "urls": urls}
     )
