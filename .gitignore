@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# miru cache
+cache/*
+!cache/.gitignore

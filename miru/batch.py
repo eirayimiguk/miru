@@ -28,21 +28,22 @@ def search_images(tags: list, enable_or_search: bool = False) -> list:
         properties.append({"property": "Tags", "multi_select": {"contains": tag}})
 
     if enable_or_search:
-        data = {"filter": {"or": properties}}
+        data = {"filter": {"or": properties}, "page_size": 10}
     else:
-        data = {"filter": {"and": properties}}
+        data = {"filter": {"and": properties}, "page_size": 10}
 
-    urls, has_more = [], True
-    while has_more:
-        response = databases.query_database(NOTION_DB_IMAGES, data)
-        for res in response["results"]:
-            page_id = res["id"]
-            res = blocks.retrieve_block_children(page_id)
-            for res in res["results"]:
-                urls.append(res["image"]["file"]["url"])
-        has_more = response["has_more"]
-        data["start_cursor"] = response["next_cursor"]
-    return urls
+    urls = []
+    response = databases.query_database(NOTION_DB_IMAGES, data)
+    for res in response["results"]:
+        page_id = res["id"]
+        res = blocks.retrieve_block_children(page_id)
+        for res in res["results"]:
+            urls.append(res["image"]["file"]["url"])
+
+    if response["has_more"]:
+        return urls, response["next_cursor"]
+    else:
+        return urls
 
 
 def get_tags() -> list:

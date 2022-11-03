@@ -3,6 +3,10 @@ import random
 
 from optparse import OptionParser
 
+from prompt_toolkit import prompt
+from prompt_toolkit.history import FileHistory
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+
 from miru.batch import get_tags, search_images, update_tags
 
 
@@ -16,17 +20,40 @@ def chanting_magic_at_random(length: int = 10):
     print(", ".join(spell))
 
 
-def search():
-    urls = search_images(["looking at viewer"])
-    print(urls)
+def search(tags: list = []):
+    urls, next_cursor = search_images(tags)
+    print(urls, next_cursor)
 
 
 def update():
     update_tags()
 
 
+def status_line():
+    return "To exit Ctrl+C"
+
+
 def main():
-    update()
+    while True:
+        cmd = prompt(">>> ",
+            bottom_toolbar=status_line,
+            history=FileHistory("cache/history"),
+            auto_suggest=AutoSuggestFromHistory()).split(" ")
+
+        if cmd[0] == "update":
+            update()
+        elif cmd[0] == "search":
+            if len(cmd) > 1:
+                search(cmd[1:])
+            else:
+                search()
+        elif cmd[0] == "random":
+            if len(cmd) > 1:
+                length = int(cmd[1])
+            else:
+                length = 30
+            chanting_magic_at_random(length)
+
 
 
 if __name__ == "__main__":
