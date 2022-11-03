@@ -1,0 +1,339 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row gallery no-gutters">
+
+  <div class="item col-2">
+    <h2>服装</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "服装" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>Meta</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "Meta" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>ポーズ</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "ポーズ" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>属性</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "属性" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>職業</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "職業" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>行為</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "行為" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>拘束</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "拘束" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>帽子</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "帽子" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>皮膚</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "皮膚" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>目</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "目" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>目線</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "目線" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>表情</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "表情" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>歯</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "歯" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>唇</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "唇" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>腋</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "腋" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>胸</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "胸" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>胴体</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "胴体" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>スカート</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "スカート" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>股</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "股" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>尻</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "尻" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>膣</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "膣" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>下着</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "下着" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>靴下</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "靴下" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>足</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "足" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>足裏</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "足裏" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>靴</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "靴" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>液体</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "液体" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+  <div class="item col-2">
+    <h2>エフェクト</h2>
+    <p>
+      {% for tag in tags %}
+      {% if tag["tag"] == "エフェクト" %}
+      <input type="checkbox" name="tag" value='{{ tag["name"] }}'>{{ tag["mean"] }}<br>
+      {% endif %}
+      {% endfor %}
+    </p>
+  </div>
+
+</div>
+
+<!-- Masonry -->
+<script>
+  $('.gallery').imagesLoaded(function () {
+    $('.gallery').masonry({
+      itemSelector: '.item'
+    });
+  });
+</script>
+
+<!-- Inactive pinch-in/out -->
+<script>
+  document.body.addEventListener("touchstart", function (e) {
+    if (e.touches && e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+  document.body.addEventListener("touchmove", function (e) {
+    if (e.touches && e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+</script>
+
+{% endblock %}
