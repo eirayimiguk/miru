@@ -8,16 +8,8 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 
 from miru.batch import get_tags, search_images, update_tags
+from miru.utils import chanting_magic_at_random
 
-
-def chanting_magic_at_random(length: int = 10):
-    tags = get_tags()
-
-    spell = []
-    for _ in range(length):
-        index = random.randint(0, len(tags) - 1)
-        spell.append(tags[index]["name"])
-    print(", ".join(spell))
 
 
 def search(tags: list = []):

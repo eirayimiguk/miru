@@ -10,6 +10,7 @@ from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
 from miru.batch import search_images, update_tags, get_tags
+from miru.utils import chanting_magic_at_random
 
 
 app = FastAPI(title="Miru for Notion")
@@ -51,8 +52,9 @@ async def index(request: Request, cursor: str):
 @app.get('/tags')
 def tags(request: Request):
     tags = get_tags()
+    magic = chanting_magic_at_random(30)
     return templates.TemplateResponse(
-        "tags.html", {"request": request, "tags": tags}
+        "tags.html", {"request": request, "tags": tags, "magic": magic}
     )
 
 
