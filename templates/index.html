@@ -11,6 +11,20 @@
   </form>
 </div>
 
+<!-- Previous/Next -->
+<div class="col-12">
+  <form class="form-row align-items-center " action="/{{ previous_cursor }}" method="post" accept-charset="utf-8">
+    <div class="row">
+      <button type="submit" class="col-12 btn btn-outline-primary rounded-0">Previous</button>
+    </div>
+  </form>
+  <form class="form-row align-items-center " action="/{{ next_cursor }}" method="post" accept-charset="utf-8">
+    <div class="row">
+      <button type="submit" class="col-12 btn btn-outline-primary rounded-0">Next</button>
+    </div>
+  </form>
+</div>
+
 <!-- Images -->
 <div class="row gallery no-gutters">
   {% for url in urls %}

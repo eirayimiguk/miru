@@ -1,6 +1,8 @@
 import os
 import logging
 
+from typing import Tuple
+
 from miru.parser import Parser
 from miru.notion.blocks import Blocks
 from miru.notion.databases import Databases
@@ -13,7 +15,7 @@ NOTION_DB_TAGS = os.environ.get("NOTION_DB_TAGS")
 NOTION_DB_IMAGES = os.environ.get("NOTION_DB_IMAGES")
 
 
-def search_images(tags: list, start_cursor=None, enable_or_search: bool = False) -> list:
+def search_images(tags: list=None, start_cursor=None, enable_or_search: bool = False) -> Tuple[list, str]:
     """
     NAI Diffusionデータベースからすべての画像のURLを取得し、リスト形式で返します
 
@@ -24,8 +26,9 @@ def search_images(tags: list, start_cursor=None, enable_or_search: bool = False)
     databases = Databases()
 
     properties = []
-    for tag in tags:
-        properties.append({"property": "Tags", "multi_select": {"contains": tag}})
+    if not tags is None:
+        for tag in tags:
+            properties.append({"property": "Tags", "multi_select": {"contains": tag}})
 
     if enable_or_search:
         data = {"filter": {"or": properties}}
@@ -35,7 +38,7 @@ def search_images(tags: list, start_cursor=None, enable_or_search: bool = False)
     if not start_cursor is None:
         data["start_cursor"] = start_cursor
 
-    data["page_size"] = 30
+    data["page_size"] = 5
 
     urls = []
     response = databases.query_database(NOTION_DB_IMAGES, data)
@@ -48,7 +51,7 @@ def search_images(tags: list, start_cursor=None, enable_or_search: bool = False)
     if response["has_more"]:
         return urls, response["next_cursor"]
     else:
-        return urls
+        return urls, ""
 
 
 def get_tags() -> list:

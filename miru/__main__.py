@@ -28,13 +28,23 @@ def index(request: Request):
         "index.html", {"request": request}
     )
 
+
 @app.post("/")
 async def index(request: Request):
     data = await request.form()
     tags = [x.strip() for x in data["tags"].split(",") if not x.strip() == '']
-    urls, _ = search_images(tags)
+    urls, next_cursor = search_images(tags)
     return templates.TemplateResponse(
-        "index.html", {"request": request, "urls": urls}
+        "index.html", {"request": request, "urls": urls, "next_cursor": next_cursor}
+    )
+
+
+# NOTE: Previous cursorは機能してない
+@app.post("/{cursor}")
+async def index(request: Request, cursor: str):
+    urls, next_cursor = search_images(start_cursor=cursor)
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "urls": urls, "next_cursor": next_cursor, "previous_cursor": cursor}
     )
 
 
