@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Today's magic</h2>
-<p>
-  {{ magic }}
-</p>
+<h2>Random Spell</h2>
+<textarea id="spell" readonly>
+{{ magic }}
+</textarea>
+<button onclick="cp()">Copy</button>
 
 <div class="row gallery no-gutters">
 
@@ -317,6 +318,15 @@
   </div>
 
 </div>
+
+<!-- copy -->
+<script>
+  function cp() {
+    var text = document.getElementById("spell");
+    text.select();
+    document.execCommand("Copy");
+  }
+</script>
 
 <!-- Masonry -->
 <script>
