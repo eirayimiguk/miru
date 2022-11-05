@@ -1,18 +1,15 @@
 import logging
-import random
 
 from optparse import OptionParser
 
-import requests
-import climage
+import png
 
-from exif import Image
 from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 
 from miru.batch import get_tags, search_images, update_tags
-from miru.utils import chanting_magic_at_random
+from miru.utils import chanting_magic_at_random, get_text_chunks
 
 
 def status_line():
@@ -23,39 +20,27 @@ def update(opts: list = None):
     update_tags()
 
 
-def search(opts: list = None):
+def search(opts: list = []):
     urls = []
     if len(opts) > 1:
-        urls, _ = search_images(opts, page_size=1)
+        urls, _ = search_images(opts, page_size=3)
     else:
-        urls, _ = search_images(page_size=1)
+        urls, _ = search_images(page_size=3)
 
-    for url in urls:
-        output_image_to_terminal(url)
+    return urls
 
 
 def random_chant(opts: list = None):
     if len(opts) > 1:
-        length = int(cmd[1])
+        length = int(opts)
     else:
         length = 30
     chanting_magic_at_random(length)
 
 
-def output_image_to_terminal(url: str):
-    r = requests.get(url)
-    with open("cache/image.png", "wb") as f:
-        f.write(r.content)
-    img = climage.convert(
-        "cache/image.png",
-        is_unicode=True,
-        is_256color=True,
-        is_truecolor=False,
-        width=100)
-    print(img)
 
 
-def main():
+def prompt():
     try:
         while True:
             cmdline = prompt(">>> ",
@@ -72,8 +57,14 @@ def main():
                 search(opts)
             elif cmd == "random":
                 random_chant(opts)
+            elif cmd == "exif":
+                get_exif()
     except KeyboardInterrupt:
         pass
+
+
+def main():
+    prompt()
 
 
 if __name__ == "__main__":

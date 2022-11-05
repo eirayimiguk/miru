@@ -1,16 +1,17 @@
 import os
 import logging
+import json
 
 from typing import Tuple
 
-from miru.parser import Parser
+from miru.parser import NAIDiffusion
 from miru.notion.blocks import Blocks
 from miru.notion.databases import Databases
 from miru.notion.pages import Pages
+from miru.utils import get_text_chunks
 
 
 # Global Parameters
-PARSED_TAG = {"name":"MiruParsed"}
 NOTION_DB_TAGS = os.environ.get("NOTION_DB_TAGS")
 NOTION_DB_IMAGES = os.environ.get("NOTION_DB_IMAGES")
 
@@ -85,13 +86,15 @@ def update_tags():
         None
     """
     pages = Pages()
+    blocks = Blocks()
     databases = Databases()
+    parser = NAIDiffusion()
 
     data = {
         "filter": {
             "property": "Tags",
             "multi_select": {
-                "does_not_contain": PARSED_TAG["name"]
+                "does_not_contain": parser.parsed_tag
             }
         }
     }
@@ -99,15 +102,28 @@ def update_tags():
     has_more = True
     while has_more:
         response = databases.query_database(NOTION_DB_IMAGES, data)
-        for res in response["results"]:
-            page_id = res["id"]
-            page = pages.retrieve_page(page_id)
-            page_title = page["properties"]["Names"]["title"][0]["plain_text"]
-            _, tags = Parser.novelai_diffusion(page_title, PARSED_TAG)
+        for page in response["results"]:
+            child = blocks.retrieve_block_children(page["id"])
+            chunks = get_text_chunks(child["results"][0]["image"]["file"]["url"])
 
-            logging.info("Update: {}".format(page_id))
-            update_page_data = {"properties":{"Tags":{"multi_select": tags}}}
-            status = pages.update_page(page_id, update_page_data)
-            logging.info("{}".format(status))
+            tags = parser.parse(chunks["Description"])
+            comment = json.loads(chunks["Comment"])
+            update_page_data = {
+                "properties": {
+                    "Tags": {"multi_select": tags},
+                    "Software": {"rich_text": [{"text": {"content": chunks["Software"]}}]},
+                    "Source": {"rich_text": [{"text": {"content": chunks["Source"]}}]},
+                    "Steps": {"number": comment["steps"]},
+                    "Sampler": {"rich_text": [{"text": {"content": comment["sampler"]}}]},
+                    "Seed": {"number": comment["seed"]},
+                    "Strength": {"number": comment["strength"]},
+                    "Noise": {"number": comment["noise"]},
+                    "Scale": {"number": comment["scale"]},
+                    "Prompt": {"rich_text": [{"text": {"content": chunks["Description"]}}]},
+                    "Negative": {"rich_text": [{"text": {"content": comment["uc"]}}]},
+                }
+            }
+            status = pages.update_page(page["id"], update_page_data)
+            logging.debug(status)
         has_more = response["has_more"]
         data["start_cursor"] = response["next_cursor"]

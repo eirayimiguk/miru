@@ -1,7 +1,8 @@
-from typing import Tuple
+class NAIDiffusion:
+    def __init__(self):
+        self.parsed_tag = "NovelAI"
 
-class Parser:
-    def novelai_diffusion(text: str, parsed_tag: dict) -> Tuple[str, list]:
+    def parse(self, text: str) -> list:
         """
         parsed_tag
             {"name": "tag"}
@@ -14,9 +15,8 @@ class Parser:
             pattern 2
                 "{tag}, {{tag}}, tag s-xxx.png" -> s-xxx, [tag, tag, tag]
         """
-        filename, tags = text.rsplit(" ", 1)[1], text.rsplit(" ", 1)[0]
-        tags = [x.replace("_", " ").replace("{", "").replace("}", "").replace("(", "").replace(")", "").strip() for x in tags.split(",") if not x.strip() == '']
+        tags = [x.replace("_", " ").replace("{", "").replace("}", "").replace("(", "").replace(")", "").strip() for x in text.split(",") if not x.strip() == '']
         tags = [{"name":tag} for tag in tags]
-        tags.append(parsed_tag)
+        tags.append({"name": self.parsed_tag})
 
-        return filename, tags
+        return tags

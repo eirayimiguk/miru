@@ -11,3 +11,6 @@ test:
 
 cli:
 	python -m miru.cli
+
+serve:
+	python -m miru.serve
